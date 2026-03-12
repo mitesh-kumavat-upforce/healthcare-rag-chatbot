@@ -89,7 +89,9 @@ def answer_question_with_rag(
     )
     _trim_session_history(session_id)
 
-      if (
+    clean_answer = answer.strip()
+    
+    if (
         FALLBACK_MESSAGE in clean_answer or 
         NON_HEALTHCARE_MESSAGE in clean_answer or 
         GREETING_MESSAGE in clean_answer

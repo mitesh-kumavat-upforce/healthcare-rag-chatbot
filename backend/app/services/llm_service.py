@@ -28,6 +28,8 @@ SYSTEM_PROMPT = (
     "If the user asks about a non-healthcare topic, respond exactly with:\n"
     f"'{NON_HEALTHCARE_MESSAGE}'\n\n"
     "Context (excerpts from hospital documents):\n{context}\n\n"
+    "You have knowledge of This HealthCare Dieases : Fever, Asthama, HyperTension, Heart Dieases, Abdominal Pain, Diabetes, Migrane, Dengue and Covid 19. \n"
+    "If User Greets you greet them back also. \n"
     "If the answer cannot be found, respond exactly with:\n"
     f"'{FALLBACK_MESSAGE}'"
 )

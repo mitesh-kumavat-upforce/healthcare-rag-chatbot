@@ -4,7 +4,7 @@ from langchain_core.documents import Document
 from langchain_core.runnables.history import RunnableWithMessageHistory
 from langchain_core.chat_history import BaseChatMessageHistory, InMemoryChatMessageHistory
 
-from app.services.llm_service import build_qa_runnable, FALLBACK_MESSAGE, NON_HEALTHCARE_MESSAGE
+from app.services.llm_service import build_qa_runnable, FALLBACK_MESSAGE, NON_HEALTHCARE_MESSAGE, GREETING_MESSAGE
 from app.rag.retriever import retrieve_relevant_documents
 
 _SESSION_HISTORIES: Dict[str, InMemoryChatMessageHistory] = {}
@@ -89,7 +89,11 @@ def answer_question_with_rag(
     )
     _trim_session_history(session_id)
 
-    if answer.strip() in {FALLBACK_MESSAGE, NON_HEALTHCARE_MESSAGE}:
+      if (
+        FALLBACK_MESSAGE in clean_answer or 
+        NON_HEALTHCARE_MESSAGE in clean_answer or 
+        GREETING_MESSAGE in clean_answer
+    ):
         return {"answer": answer, "sources": []}
 
     sources = _extract_sources(docs_with_scores)
